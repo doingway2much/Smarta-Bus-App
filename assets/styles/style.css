@@ -1,3 +1,35 @@
 h1 {
 color: red;
 }
+
+.jumbotron {
+text-align: center;
+
+
+}
+
+#section1 { 
+    background-color: red;
+    float:left;
+    margin: 10px;
+    height: 250px;
+    width: 650px; 
+
+}
+
+#section2 {
+background-color: blue;
+float: left;
+margin:10px;
+height:250px;
+width: 650px;
+
+
+}
+
+#map {
+    background-color: green;
+    align-content: center;
+    margin:10px;
+    height: 800px; 
+}
