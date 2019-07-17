@@ -19,11 +19,11 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 function initMap() {
-    // The location of Uluru
+    // The location of Atlanta
     var atlanta = { lat: 33.7763658, lng: -84.3899218 };
-    // The map, centered at Uluru
+    // The map, centered at Atlanta
     var map = new google.maps.Map(
-        document.getElementById('map'), { zoom: 4, center: atlanta });
-    // The marker, positioned at Uluru
+        document.getElementById('map'), { zoom: 18, center: atlanta });
+    // The marker, positioned at Atlanta
     var marker = new google.maps.Marker({ position: atlanta, map: map });
 }
