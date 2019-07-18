@@ -1,23 +1,4 @@
-// console.log("Hello World");
 
-// function getBuses() {
-
-// 	$.ajax({
-//     url: 'http://developer.itsmarta.com/BRDRestService/BRDRestService.svc/GetAllBus',
-//     type: 'GET',
-//     data: { get_param: 'value' }, 
-//     dataType: 'json',
-//     success: function (data) { 
-//         $.each(data, function(index, element) {
-//             $('body').append($('<div>', {
-//                 text: element.name
-//             }));
-//         });
-//     }
-// });
-// }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
 function initMap() {
     // The location of Atlanta
     var atlanta = { lat: 33.7763658, lng: -84.3899218 };
@@ -27,3 +8,17 @@ function initMap() {
     // The marker, positioned at Atlanta
     var marker = new google.maps.Marker({ position: atlanta, map: map });
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//http://developer.itsmarta.com/BRDRestService/BRDRestService.svc/
+//GetAllBus
+//GetBusByRoute
+
+var queryURL = "http://developer.itsmarta.com/BRDRestService/BRDRestService.svc/GetAllBus";
+
+$.ajax({
+    url: queryURL,
+    method: "GET"
+}).then(function (response) {
+    console.log(response);
+});
