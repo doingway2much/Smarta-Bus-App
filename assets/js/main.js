@@ -1,20 +1,39 @@
-// function initMap() {
-//     // The location of Atlanta
-//     var atlanta = { lat: 33.7763658, lng: -84.3899218 };
-//     // The map, centered at Atlanta
-//     var map = new google.maps.Map(
-//         document.getElementById('map'), { zoom: 18, center: atlanta });
-//     // The marker, positioned at Atlanta
-//     var marker = new google.maps.Marker({ position: atlanta, map: map });
-// }
 
 var map, infoWindow;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 33.7763658, lng: -84.3899218 },
-        zoom: 18
+        center: new google.maps.LatLng(33.7763658, -84.3899218), zoom: 18
     });
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+    var iconBase =
+        'https://developers.google.com/maps/documentation/javascript/examples/full/images/';
+    var icons = {
+        info: {
+            icon: iconBase + 'info-i_maps.png'
+        }
+    };
+    var features = [
+        {
+            position: new google.maps.LatLng(-33.91721, 151.22630),
+            type: 'info'
+        }, {
+            position: new google.maps.LatLng(-33.91539, 151.22820),
+            type: 'info'
+        }
+    ];
+
+    // Create markers.
+
+    for (var i = 0; i < features.length; i++) {
+        var marker = new google.maps.Marker({
+            position: features[i].position,
+            icon: icons[features[i].type].icon,
+            map: map
+        });
+    };
     infoWindow = new google.maps.InfoWindow;
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
@@ -55,7 +74,7 @@ $.ajax({
     url: queryURL,
     method: "GET"
 }).then(function (response) {
-    console.log(response[0].VEHICLE);
+    // console.log(response[0].VEHICLE);
     for (var i = 0; i < response.length; i++) {
 
         console.log(parseFloat(response[i].LATITUDE) + "," + parseFloat(response[i].LONGITUDE));
@@ -66,6 +85,7 @@ $.ajax({
         });
     }
 });
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
