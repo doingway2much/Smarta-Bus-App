@@ -31,5 +31,7 @@ width: 650px;
     background-color: green;
     align-content: center;
     margin:10px;
-    height: 800px; 
+    height: 500px;
+    width: 500px;
+    float: left; 
 }
