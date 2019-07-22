@@ -1,4 +1,49 @@
+body{
+    background: url("../Images/marta.webp");
+    /* To get image to fit properly to fill background: */
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+} 
+
 h1 {
+color: red;
+}
+
+h5{
+    color: red;
+}
+
+.jumbotron {
+text-align: center;
+margin: 50px;
+margin-top: 10px;
+background-color: white;
+opacity: .9;
+
+}
+
+#section1 { 
+    background-color: white;
+    float:left;
+    margin: 10px;
+    height: 250px;
+    width: 650px; 
+    opacity: .65;
+}
+
+#section2 {
+    background-color: white;
+float: left;
+margin:10px;
+height:250px;
+width: 650px;
+opacity: .65;
+
+}
+
+#map {
     color: red;
     }
     
@@ -67,5 +112,8 @@ h1 {
     height: 500px;
     width: 500px;
     float: left; 
+
+    opacity: .95;
+}
 }
 
