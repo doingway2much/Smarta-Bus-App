@@ -55,12 +55,13 @@ $(document).ready(function () {
       center: new google.maps.LatLng(33.7763658, -84.3899218), zoom: 16
     });
     //////////////////////////////////////////////////////////////////////////////
-    var iconBase =
-      'https://developers.google.com/maps/documentation/javascript/examples/full/images/';
+    // var iconBase =
+    //   'assets/images/';
   
     var icons = {
       info: {
-        icon: iconBase + 'info-i_maps.png'
+        icon: '/assets/images/little_bus.png'
+
       }
     };
   
@@ -1880,9 +1881,10 @@ $(document).ready(function () {
         var pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
+
         };
         infoWindow.setPosition(pos);
-        infoWindow.setContent('Location found.');
+        infoWindow.setContent('You are here.');
         infoWindow.open(map);
         map.setCenter(pos);
 
