@@ -13,30 +13,53 @@
     <script src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js'></script>
     <!-- Google JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- moment -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </head>
 
 <body>
 
     <div class="jumbotron">
-        <h1 class="display-4">Title</h1>
-        <p class="lead">Sub-text here</p>
+        <h1 class="display-4">SMarta</h1>
+        <p class="lead">Welcome To SMarta: A Better Way Around Town!</p>
         <hr class="my-4">
+        <h5>Today is <span id="currentStatus"></span></h5>
         <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
     </div>
 
-    <div id="map">
-        Map goes here
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" id="map">
+                Map goes here
+            </div>
+        </div>
     </div>
 
     <br>
-    <div id="section1">
-        Section 1
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8" id="section1A">
+                Bus Arrivals:
+                <hr>
+            </div>
+            <div class="col-sm-4" id="section2A">
+                Section 2
+            </div>
+        </div>
     </div>
-    <div id="section2">
-        Section 2
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8" id="section1B">
+                Section 1
+            </div>
+            <div class="col-sm-4" id="section2B">
+                Section 2
+            </div>
+        </div>
     </div>
 
-    <script src="assets/js/main.js" async defer></script>
+    <script src="assets\js\main.js" async defer></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1CUFixLuZdRhKfjPIFy6_fGhrIJ-HElE&callback=initMap">
         </script>
