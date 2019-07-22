@@ -4,6 +4,23 @@
 //GetAllBus
 //GetBusByRoute
 
+// Show current time //
+
+var datetime = null,
+date = null;
+
+var update = function () {
+  date = moment(new Date())
+  datetime.html(date.format('dddd, MMMM Do YYYY, h:mm:ss a'));
+};
+
+$(document).ready(function(){
+  datetime = $('#currentStatus')
+  update();
+  setInterval(update, 1000);
+
+});
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var map, infoWindow;
 var latLng;
@@ -16,13 +33,13 @@ $.ajax({
 }).then(function (response) {
   // console.log(response[i].VEHICLE);
   for (var i = 0; i < response.length; i++) {
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(response[i].LATITUDE, response[i].LONGITUDE),
-        // icon: icons['info'].icon,
-        map: map
-      });
-      console.log(response[i]);
-      console.log(marker);
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(response[i].LATITUDE, response[i].LONGITUDE),
+      // icon: icons['info'].icon,
+      map: map
+    });
+    console.log(response[i]);
+    console.log(marker);
 
     console.log(parseFloat(response[i].LATITUDE) + "," + parseFloat(response[i].LONGITUDE));
     latLng = (parseFloat(response[i].LATITUDE) + "," + parseFloat(response[i].LONGITUDE));
@@ -32,8 +49,50 @@ $.ajax({
     });
 
   }
+  // Your web app's Firebase configuration
+  var config = {
+    apiKey: "AIzaSyBzvjLvnqk0io9Q5Z8Iut5l_KYXeq9BYNA",
+    authDomain: "marta-6bc2a.firebaseapp.com",
+    databaseURL: "https://marta-6bc2a.firebaseio.com",
+    projectId: "marta-6bc2a",
+    storageBucket: "marta-6bc2a.appspot.com",
+    messagingSenderId: "294822623796",
+    appId: "1:294822623796:web:e3c9da70932f44fd"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(config);
 
+  var database = firebase.database();
+
+  var vehicle = (response[0].vehicle);
+  var LONGITUDE = "";
+  var LATITUDE = "";
+  var stopID = "";
+  var tripID = "";
+
+  console.log(vehicle);
+
+  // marker.addListener('click', function() {
+  //   map.setZoom(8);
+  //   map.setCenter(marker.getPosition());
+  // });
+
+  // database.ref().on("value", function (snapshot) {
+  $(marker).on("click", function (event) {
+
+    database.ref().set({
+      vehicle: vehicle,
+      LONGITUDE: LONGITUDE,
+      LATITUDE: LATITUDE,
+      stopID: stopID,
+      tripID: tripID
+
+    })
+
+
+  });
 });
+
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -96,6 +155,10 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     'Error: Your browser doesn\'t support geolocation.');
   infoWindow.open(map);
 }
+
+
+
+
 
     // window.eqfeed_callback = function (response) {
 
