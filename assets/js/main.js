@@ -1885,6 +1885,16 @@ $(document).ready(function () {
         infoWindow.setContent('Location found.');
         infoWindow.open(map);
         map.setCenter(pos);
+
+        var circle = new google.maps.Circle({
+          center: pos,
+          map: map,
+          radius: 402,          // in meters
+          fillColor: '#FF6600',
+          fillOpacity: 0.3,
+          strokeColor: "#FFF",
+          strokeWeight: 0         // No border
+      });
       }, function () {
         handleLocationError(true, infoWindow, map.getCenter());
       });
