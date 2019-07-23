@@ -5,6 +5,12 @@
 //GetBusByRoute
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Creates array of data for all the Marta stops that we can use 
+$.getJSON( "busStops.json", function( data ) {
+  var stopsData = [data];
+  console.log(stopsData);
+  });
+
 
 // Show current time //
 $(document).ready(function () {
