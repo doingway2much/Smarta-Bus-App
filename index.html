@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js">
-<!--<![endif]-->
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,37 +9,57 @@
     <!--Bootstrap:-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js'></script>
+    <!-- Google JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- moment -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </head>
-
 <body>
-
-    <!-- <h1>Hello World</h1> -->
-    <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
     <div class="jumbotron">
-        <h1 class="display-4">Title</h1>
-        <p class="lead">Sub-text here</p>
+        <h1 class="display-4">SMarta</h1>
+        <p class="lead">Welcome To SMarta: A Better Way Around Town!</p>
         <hr class="my-4">
+        <h5>Today is <span id="currentStatus"></span></h5>
         <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
     </div>
 
-    <div id="map">
-        Map goes here
-    </div>
 
-    <br>
-    <div id="section1">
-        Section 1
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" id="map">
+                Map goes here
+            </div>
+        </div>
     </div>
-    <div id="section2">
-        Section 2
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8" id="section1A">
+                Bus Arrivals:
+                <hr>
+            </div>
+            <div class="col-sm-4" id="section2A">
+                Section 2
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8" id="section1B">
+                Section 1
+            </div>
+            <div class="col-sm-4" id="section2B">
+                Section 2
+            </div>
+        </div>
     </div>
 
     <script src="assets/js/main.js" async defer></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB10Nc_vvK75TgtE0exWTzR1Ul3crz4z6s&callback=initMap">
-    </script>
-</body>
 
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1CUFixLuZdRhKfjPIFy6_fGhrIJ-HElE&callback=initMap">
+        </script>
+</body>
 </html>
