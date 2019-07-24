@@ -8,24 +8,8 @@
 //Creates array of data for all the Marta stops that we can use 
 
 
-var icons = {
-  info: {
-    icon: '/assets/images/little_bus.png'
 
-  }
-};
-$.getJSON("busStops.json", function (data) {
-  var stopsData = { data };
-  //   console.log(stopsData.data[i].stop_lat);
-  //   console.log(stopsData.data[0].stop_lon);
-  for (var i = 0; i < stopsData.data.length; i++) {
-    var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(stopsData.data[i].stop_lat, stopsData.data[i].stop_lon),
-      icon: icons.info.icon,
-      map: map
-    });
-  };
-});
+
 
 $.getJSON("routes.json", function (data1) {
   var routesData = { data1 };
@@ -107,6 +91,44 @@ function initMap() {
         strokeColor: "#FFF",
         strokeWeight: 0         // No border
       });
+
+      var filteredCircle = new google.maps.Circle({
+        center: pos,
+        map: map,
+        radius: 804,          // in meters
+        // fillColor: '#33CAFF',
+        fillOpacity: 0.0,
+        strokeColor: "#33CAFF",
+        strokeWeight: 2         // No border
+      
+      });
+
+      $.getJSON("busStops.json", function (data) {
+        var stopsData = { data };
+        var icons = {
+          info: {
+            icon: '/assets/images/little_bus.png'
+        
+          }
+        };
+        var markers = [];
+        for (var i = 0; i < stopsData.data.length; i++) {
+          // if(stopsData.data[i].stop_lat > 33.730000) {
+          var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(stopsData.data[i].stop_lat, stopsData.data[i].stop_lon),
+            icon: icons.info.icon,
+            map: map
+          });
+          markers.push(marker);
+          
+          
+        };
+       
+        // };
+        console.log(markers); 
+      }
+      );
+      
     }, function () {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -122,6 +144,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     'Error: Your browser doesn\'t support geolocation.');
   infoWindow.open(map);
 }
+
+
 
       // window.eqfeed_callback = function (response) {
 
