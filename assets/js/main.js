@@ -6,7 +6,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+var userPos = [];
 var latlngRoutes = [];
 $.getJSON("routes.json", function (data1) {
   var routesData = { data1 };
@@ -55,8 +55,9 @@ $.ajax({
   url: queryURL,
   method: "GET"
 }).then(function (response) {
-  $("#section1B").empty();
   for (var i = 0; i < response.length; i++) {
+    // var stopDistance = distance(response[i].LATITUDE, response[i].LONGITUDE, userPos[0].lat, userPos[0].lng);
+    // console.log(stopDistance);
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(response[i].LATITUDE, response[i].LONGITUDE),
       map: map
@@ -87,6 +88,7 @@ function initMap() {
 
     
 //Creates array of data for all the Marta stops that we can use 
+
 $.getJSON("busStops.json", function (data) {
   var icons = {
     info: {
@@ -94,36 +96,38 @@ $.getJSON("busStops.json", function (data) {
     }
   };
   var stopsData = { data };
- var allBusStops = [];
+  var allBusStops = [];
   for (var i = 0; i < stopsData.data.length; i++) {
-    if (stopsData.data[i].stop_lat && stopsData.data[i].stop_lon !== bounds ){
+    
       var busStops = {
         lat: parseFloat(stopsData.data[i].stop_lat),
         lng: parseFloat(stopsData.data[i].stop_lon),
       }
-      allBusStops.push(busStops);
+      allBusStops.push(busStops);     
+      // console.log(distance(stopsData.data[i].stop_lat, stopsData.data[i].stop_lon, userPos[0].lat, userPos[0].lng));
+      var stopDistance = distance(stopsData.data[i].stop_lat, stopsData.data[i].stop_lon, userPos[0].lat, userPos[0].lng);
+      if (stopDistance < 0.499582 ){
       var marker = new google.maps.Marker({
       position: new google.maps.LatLng(stopsData.data[i].stop_lat, stopsData.data[i].stop_lon),
       icon: icons.info.icon,
       map: map
     });
-    
-    markers.push(marker);
   }
-
+    markers.push(marker);
   };
-  // console.log(markers)
-  console.log(allBusStops[0].lat);
-  console.log(allBusStops[0].lng);
+  
+  // console.log(allBusStops[100].lat);
+  // console.log(allBusStops[100].lng);
   var lat1 = allBusStops[0].lat
   var lon1 = allBusStops[0].lng
   
-  console.log(userPos[0].lat);
-  console.log(userPos[0].lng);
+  // console.log(userPos[0].lat);
+  // console.log(userPos[0].lng);
+  
 
   var lat2 = userPos[0].lat
   var lon2 = userPos[0].lng
-  function distance(lat1, lon1, lat2, lon2, unit) {
+  function distance(lat1, lon1, lat2, lon2) {
     if ((lat1 == lat2) && (lon1 == lon2)) {
       return 0;
     }
@@ -139,11 +143,14 @@ $.getJSON("busStops.json", function (data) {
       dist = Math.acos(dist);
       dist = dist * 180/Math.PI;
       dist = dist * 60 * 1.1515;
-      if (unit=="K") { dist = dist * 1.609344 }
-      if (unit=="N") { dist = dist * 0.8684 }
       return dist;
     }
+    
   }
+  console.log(distance(allBusStops[100].lat, allBusStops[100].lng, userPos[0].lat, userPos[0].lng));
+  
+  
+
 });
 
 });
@@ -151,7 +158,7 @@ $.getJSON("busStops.json", function (data) {
 
   // var transitLayer = new google.maps.TransitLayer();
   // transitLayer.setMap(map);
-  var userPos = [];
+  
   infoWindow = new google.maps.InfoWindow;
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
