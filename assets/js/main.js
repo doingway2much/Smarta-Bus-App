@@ -422,6 +422,7 @@ $.ajax({
         $(".wind").text("Wind Speed: " + response.wind.speed);
         $(".humidity").text("Humidity: " + response.main.humidity);
         $(".temp").text("Temperature (F) " + response.main.temp);
+        $(".condition").text("Current Conditions: " + response.weather[0].main);
 
         // Log the data in the console as well
         console.log("Wind Speed: " + response.wind.speed);
