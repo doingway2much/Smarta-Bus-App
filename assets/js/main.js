@@ -92,7 +92,7 @@ function initMap() {
 $.getJSON("busStops.json", function (data) {
   var icons = {
     info: {
-      icon: '/assets/images/little_bus.png'
+      icon: '/assets/images/little-blue-bus.png'
     }
   };
   var stopsData = { data };
