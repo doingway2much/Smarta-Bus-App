@@ -1,54 +1,67 @@
-h1 {
+    h1 {
     color: red;
     }
+    font {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
     
+    body{
+        background-image: url("http://media.bizj.us/view/img/2768081/marta-bus*1200xx2464-1387-0-210.jpg");
+        background-size: cover;
+    }
     .jumbotron {
+    /* background-image: url(/assets/Images/SMARTA.png); */
+    /* background-size: cover; */
+    background-repeat:  no-repeat;
     text-align: center;
     }
     
     #section1A { 
-    background-color: lightsteelblue;
+    margin-right: 95px;
+    background-color: #e6e9ec;
     height: 40px;
     text-align: center;
     border-style: solid solid none solid ;
-    border-width: 5px;
+    border-width: 2px;
     font-weight: bold;
     font-size: 18px;
     }
         
     #section2A {
-    background-color: blue;
+   
+    background-color: #e6e9ec;
     height: 40px;
     text-align: center;
     border-style: solid solid none solid ;
-    border-width: 5px;
+    border-width: 2px;
     font-weight: bold;
     font-size: 18px;
     }
     
     #section1B { 
-    background-color: lightsteelblue;
+    margin-right: 95px;
+    background-color: #e6e9ec;
     height: 350px;
     text-align: center;
     margin-bottom: 10%;
     border-style: none solid solid solid;
-    border-width: 5px;
+    border-width: 2px;
     font-weight: bold;
     font-size: 18px;
-    line-height: 70px;
+    line-height: 10px;
     overflow: auto;
     }
     
     #section2B {
-    background-color: blue;
+    background-color: #e6e9ec;
     height: 350px;
     text-align: center;
     margin-bottom: 10%;
     border-style: none solid solid solid;
-    border-width: 5px;
+    border-width: 2px;
     font-weight: bold;
     font-size: 18px;
-    line-height: 70px;
+    line-height: 10px;
     }
     
     #map {
@@ -60,13 +73,7 @@ h1 {
     }
     
     h5{
-    color: red;
+    color: #FF7500;
     }
 
-    align-content: center;
-    margin:10px;
-    height: 500px;
-    width: 500px;
-    float: left; 
-}
 
