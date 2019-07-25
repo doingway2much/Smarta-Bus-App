@@ -279,7 +279,7 @@ $.getJSON("busStops.json", function (data) {
       }
       if (stopDistance < 1.0){
       latlngDestination.push(closeStops);
-      
+      // console.log(latlngDestination);
       
       }
       if (stopDistance < 0.499582 ){
@@ -288,15 +288,20 @@ $.getJSON("busStops.json", function (data) {
       icon: icons.info.icon,
       map: map
     });
-    var min = Math.min.apply(null, latlngDestination.map(function(a){return a.dis;}))
-    // (latlngDestination.dis).sort(function(a, b){return a-b});
-    console.log(min);
+
+    latlngDestination.sort(function (a, b) {
+      return a.dis - b.dis
+  })
+  
+  var min = latlngDestination[0],
+      max = latlngDestination[latlngDestination.length - 1]
+      
     
   }
   
     markers.push(marker);
   };
-  
+  console.log(latlngDestination[0]);
   // console.log(allBusStops[100].lat);
   // console.log(allBusStops[100].lng);
   var lat1 = allBusStops[0].lat
@@ -368,7 +373,8 @@ $.getJSON("busStops.json", function (data) {
     // fillColor: '#33CAFF',
     fillOpacity: 0.0,
     strokeColor: "#33CAFF",
-    strokeWeight: 2         // No border
+    strokeWeight: 6         // No border
+    
     
   });
  
