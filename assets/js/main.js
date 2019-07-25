@@ -1,5 +1,7 @@
 var userPos = [];
 var latlngRoutes = [];
+var latlngDestination = [];
+var allBusStops = [];
 $.getJSON("routes.json", function (data1) {
   var routesData = { data1 };
   for (var j = 0; j < routesData.data1.length; j++) {
@@ -242,6 +244,9 @@ $.ajax({
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: new google.maps.LatLng(33.7763658, -84.3899218), zoom: 15.5
+  })
+  map2 = new google.maps.Map(document.getElementById('section2B'), {
+    center: new google.maps.LatLng(33.7763658, -84.3899218), zoom: 15.5
   });
 // Gets map boundries
   google.maps.event.addListener(map, 'bounds_changed', function() {
@@ -253,8 +258,7 @@ function initMap() {
 
     
 //Creates array of data for all the Marta stops that we can use 
-var latlngDestination = [];
-var allBusStops = [];
+
 $.getJSON("busStops.json", function (data) {
   var icons = {
     info: {
@@ -290,25 +294,46 @@ $.getJSON("busStops.json", function (data) {
     });
 
     latlngDestination.sort(function (a, b) {
-      return a.dis - b.dis
+    return a.dis - b.dis
   })
-  
   var min = latlngDestination[0],
       max = latlngDestination[latlngDestination.length - 1]
-      
-    
   }
-  
-    markers.push(marker);
+  markers.push(marker);
   };
-  console.log(latlngDestination[0]);
-  // console.log(allBusStops[100].lat);
-  // console.log(allBusStops[100].lng);
-  var lat1 = allBusStops[0].lat
-  var lon1 = allBusStops[0].lng
-  
-  // console.log(userPos[0].lat);
-  // console.log(userPos[0].lng);
+  // function initMap() {
+  //   map = new google.maps.Map(document.getElementById('section2B'), {
+  //     center: new google.maps.LatLng(33.7763658, -84.3899218), zoom: 15.5
+  //   });
+    
+  function displayRoute() {
+
+    var start = new google.maps.LatLng(userPos[0].lat, userPos[0].lng);
+    var end = new google.maps.LatLng(latlngDestination[0].lat, latlngDestination[0].lng);
+
+    var directionsDisplay = new google.maps.DirectionsRenderer();// also, constructor can get "DirectionsRendererOptions" object
+    directionsDisplay.setMap(map2); // map should be already initialized.
+
+    var request = {
+        origin : start,
+        destination : end,
+        travelMode : google.maps.TravelMode.WALKING
+    };
+    var directionsService = new google.maps.DirectionsService(); 
+    directionsService.route(request, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+            console.log(response);
+        }
+    });
+    
+}
+displayRoute(console.log());
+console.log(latlngDestination[0]);
+var lat1 = allBusStops[0].lat
+var lon1 = allBusStops[0].lng
+  })
+
   
 
   var lat2 = userPos[0].lat
@@ -333,14 +358,11 @@ $.getJSON("busStops.json", function (data) {
     }
     
   }
-  // console.log(distance(allBusStops[100].lat, allBusStops[100].lng, userPos[0].lat, userPos[0].lng));
 
 });
 
-});
+// });
 
-  // var transitLayer = new google.maps.TransitLayer();
-  // transitLayer.setMap(map);
   
   infoWindow = new google.maps.InfoWindow;
   // Try HTML5 geolocation.
@@ -393,7 +415,3 @@ $.getJSON("busStops.json", function (data) {
       'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
 }
-
-
-
-
