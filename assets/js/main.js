@@ -5,26 +5,8 @@
 //GetBusByRoute
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Creates array of data for all the Marta stops that we can use 
 
-
-var icons = {
-  info: {
-    icon: '/assets/images/little_bus.png'
-
-  }
-};
-$.getJSON("busStops.json", function (data) {
-  var stopsData = { data };
-  for (var i = 0; i < stopsData.data.length; i++) {
-    var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(stopsData.data[i].stop_lat, stopsData.data[i].stop_lon),
-      icon: icons.info.icon,
-      map: map
-    });
-  };console.log(stopsData)
-});
-
+var userPos = [];
 var latlngRoutes = [];
 $.getJSON("routes.json", function (data1) {
   var routesData = { data1 };
@@ -73,8 +55,9 @@ $.ajax({
   url: queryURL,
   method: "GET"
 }).then(function (response) {
-  $("#section1B").empty();
   for (var i = 0; i < response.length; i++) {
+    // var stopDistance = distance(response[i].LATITUDE, response[i].LONGITUDE, userPos[0].lat, userPos[0].lng);
+    // console.log(stopDistance);
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(response[i].LATITUDE, response[i].LONGITUDE),
       map: map
@@ -95,10 +78,87 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: new google.maps.LatLng(33.7763658, -84.3899218), zoom: 16
   });
+// Gets map boundries
+  google.maps.event.addListener(map, 'bounds_changed', function() {
+    var bounds =  map.getBounds();
+    var ne = bounds.getNorthEast();
+    var sw = bounds.getSouthWest();
+    console.log(bounds);
+    var markers = [];
 
-  var transitLayer = new google.maps.TransitLayer();
-  transitLayer.setMap(map);
+    
+//Creates array of data for all the Marta stops that we can use 
 
+$.getJSON("busStops.json", function (data) {
+  var icons = {
+    info: {
+      icon: '/assets/images/little_bus.png'
+    }
+  };
+  var stopsData = { data };
+  var allBusStops = [];
+  for (var i = 0; i < stopsData.data.length; i++) {
+    
+      var busStops = {
+        lat: parseFloat(stopsData.data[i].stop_lat),
+        lng: parseFloat(stopsData.data[i].stop_lon),
+      }
+      allBusStops.push(busStops);     
+      // console.log(distance(stopsData.data[i].stop_lat, stopsData.data[i].stop_lon, userPos[0].lat, userPos[0].lng));
+      var stopDistance = distance(stopsData.data[i].stop_lat, stopsData.data[i].stop_lon, userPos[0].lat, userPos[0].lng);
+      if (stopDistance < 0.499582 ){
+      var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(stopsData.data[i].stop_lat, stopsData.data[i].stop_lon),
+      icon: icons.info.icon,
+      map: map
+    });
+  }
+    markers.push(marker);
+  };
+  
+  // console.log(allBusStops[100].lat);
+  // console.log(allBusStops[100].lng);
+  var lat1 = allBusStops[0].lat
+  var lon1 = allBusStops[0].lng
+  
+  // console.log(userPos[0].lat);
+  // console.log(userPos[0].lng);
+  
+
+  var lat2 = userPos[0].lat
+  var lon2 = userPos[0].lng
+  function distance(lat1, lon1, lat2, lon2) {
+    if ((lat1 == lat2) && (lon1 == lon2)) {
+      return 0;
+    }
+    else {
+      var radlat1 = Math.PI * lat1/180;
+      var radlat2 = Math.PI * lat2/180;
+      var theta = lon1-lon2;
+      var radtheta = Math.PI * theta/180;
+      var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+      if (dist > 1) {
+        dist = 1;
+      }
+      dist = Math.acos(dist);
+      dist = dist * 180/Math.PI;
+      dist = dist * 60 * 1.1515;
+      return dist;
+    }
+    
+  }
+  console.log(distance(allBusStops[100].lat, allBusStops[100].lng, userPos[0].lat, userPos[0].lng));
+  
+  
+
+});
+
+});
+  
+
+  // var transitLayer = new google.maps.TransitLayer();
+  // transitLayer.setMap(map);
+  
   infoWindow = new google.maps.InfoWindow;
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
@@ -108,6 +168,7 @@ function initMap() {
         lng: position.coords.longitude
 
       };
+      userPos.push(pos);
       infoWindow.setPosition(pos);
       infoWindow.setContent('You are here.');
       infoWindow.open(map);
@@ -130,8 +191,9 @@ function initMap() {
     fillOpacity: 0.0,
     strokeColor: "#33CAFF",
     strokeWeight: 2         // No border
-
+    
   });
+ 
       }, function () {
         handleLocationError(true, infoWindow, map.getCenter());
       });
@@ -147,5 +209,7 @@ function initMap() {
       'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
 }
+
+
 
 
