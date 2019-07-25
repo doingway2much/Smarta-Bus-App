@@ -2,7 +2,6 @@ var userPos = [];
 var latlngRoutes = [];
 var latlngDestination = [];
 var allBusStops = [];
-<<<<<<< HEAD
 $.getJSON("routes.json", function(data1) {
     var routesData = { data1 };
     for (var j = 0; j < routesData.data1.length; j++) {
@@ -16,20 +15,6 @@ $.getJSON("routes.json", function(data1) {
                 { lat: 33.6892, lng: -84.27269 }
             ];
         }
-=======
-$.getJSON("routes.json", function (data1) {
-  var routesData = { data1 };
-  for (var j = 0; j < routesData.data1.length; j++) {
-    if (routesData.data1[j].shape_id === 110851) {
-      var newRoutePoint = {
-        lat: parseFloat(routesData.data1[j].shape_pt_lat),
-        lng: parseFloat(routesData.data1[j].shape_pt_lon),
-      };
-      latlngRoutes.push(newRoutePoint);
-      var flightPlanCoordinates = [
-        { lat: 33.6892, lng: -84.27269 }
-      ];
->>>>>>> 96bf2a60b7d0d43fbcb9212f2f1ad1a38192593c
     }
     var routes = new google.maps.Polyline({
         path: latlngRoutes,
@@ -247,7 +232,6 @@ $.ajax({
 });
 
 function initMap() {
-<<<<<<< HEAD
     map = new google.maps.Map(document.getElementById('map'), {
         center: new google.maps.LatLng(33.7763658, -84.3899218),
         zoom: 15.5
@@ -273,32 +257,6 @@ function initMap() {
             };
             var stopsData = { data };
             for (var i = 0; i < stopsData.data.length; i++) {
-=======
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: new google.maps.LatLng(33.7763658, -84.3899218), zoom: 15.5
-  })
-  map2 = new google.maps.Map(document.getElementById('section2B'), {
-    center: new google.maps.LatLng(33.7763658, -84.3899218), zoom: 15.5
-  });
-// Gets map boundries
-  google.maps.event.addListener(map, 'bounds_changed', function() {
-    var bounds =  map.getBounds();
-    var ne = bounds.getNorthEast();
-    var sw = bounds.getSouthWest();
-    // console.log(bounds);
-    var markers = [];
-
-    
-//Creates array of data for all the Marta stops that we can use 
-
-$.getJSON("busStops.json", function (data) {
-  var icons = {
-    info: {
-      icon: '/assets/images/little-blue-bus.png'
-    }
-  };
-  var stopsData = { data };
->>>>>>> 96bf2a60b7d0d43fbcb9212f2f1ad1a38192593c
 
                 var busStops = {
                     lat: parseFloat(stopsData.data[i].stop_lat),
@@ -316,7 +274,6 @@ $.getJSON("busStops.json", function (data) {
                     latlngDestination.push(closeStops);
                     // console.log(latlngDestination);
 
-<<<<<<< HEAD
                 }
                 if (stopDistance < 0.499582) {
                     var marker = new google.maps.Marker({
@@ -354,73 +311,6 @@ $.getJSON("busStops.json", function (data) {
                         console.log(response);
                     }
                 });
-=======
-    latlngDestination.sort(function (a, b) {
-    return a.dis - b.dis
-  })
-  var min = latlngDestination[0],
-      max = latlngDestination[latlngDestination.length - 1]
-  }
-  markers.push(marker);
-  };
-  // function initMap() {
-  //   map = new google.maps.Map(document.getElementById('section2B'), {
-  //     center: new google.maps.LatLng(33.7763658, -84.3899218), zoom: 15.5
-  //   });
-    
-  function displayRoute() {
-
-    var start = new google.maps.LatLng(userPos[0].lat, userPos[0].lng);
-    var end = new google.maps.LatLng(latlngDestination[0].lat, latlngDestination[0].lng);
-
-    var directionsDisplay = new google.maps.DirectionsRenderer();// also, constructor can get "DirectionsRendererOptions" object
-    directionsDisplay.setMap(map2); // map should be already initialized.
-
-    var request = {
-        origin : start,
-        destination : end,
-        travelMode : google.maps.TravelMode.WALKING
-    };
-    var directionsService = new google.maps.DirectionsService(); 
-    directionsService.route(request, function(response, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-            console.log(response);
-        }
-    });
-    
-}
-displayRoute(console.log());
-console.log(latlngDestination[0]);
-var lat1 = allBusStops[0].lat
-var lon1 = allBusStops[0].lng
-  })
-
-  
-
-  var lat2 = userPos[0].lat
-  var lon2 = userPos[0].lng
-  function distance(lat1, lon1, lat2, lon2) {
-    if ((lat1 == lat2) && (lon1 == lon2)) {
-      return 0;
-    }
-    else {
-      var radlat1 = Math.PI * lat1/180;
-      var radlat2 = Math.PI * lat2/180;
-      var theta = lon1-lon2;
-      var radtheta = Math.PI * theta/180;
-      var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-      if (dist > 1) {
-        dist = 1;
-      }
-      dist = Math.acos(dist);
-      dist = dist * 180/Math.PI;
-      dist = dist * 60 * 1.1515;
-      return dist;
-    }
-    
-  }
->>>>>>> 96bf2a60b7d0d43fbcb9212f2f1ad1a38192593c
 
             }
             displayRoute(console.log());
@@ -429,7 +319,6 @@ var lon1 = allBusStops[0].lng
             var lon1 = allBusStops[0].lng
         })
 
-<<<<<<< HEAD
         var lat2 = userPos[0].lat
         var lon2 = userPos[0].lng
 
@@ -450,18 +339,6 @@ var lon1 = allBusStops[0].lng
                 dist = dist * 60 * 1.1515;
                 return dist;
             }
-=======
-// });
-
-  
-  infoWindow = new google.maps.InfoWindow;
-  // Try HTML5 geolocation.
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
->>>>>>> 96bf2a60b7d0d43fbcb9212f2f1ad1a38192593c
 
         }
     });
@@ -516,7 +393,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         'Error: The Geolocation service failed.' :
         'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
-<<<<<<< HEAD
 }
 
 // This is our API key
@@ -553,6 +429,3 @@ $.ajax({
         console.log("Humidity: " + response.main.humidity);
         console.log("Temperature (F): " + response[0].main.temp);
     });
-=======
-}
->>>>>>> 96bf2a60b7d0d43fbcb9212f2f1ad1a38192593c
