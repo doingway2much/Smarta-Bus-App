@@ -1,5 +1,7 @@
 var userPos = [];
 var latlngRoutes = [];
+var latlngDestination = [];
+var allBusStops = [];
 $.getJSON("routes.json", function(data1) {
     var routesData = { data1 };
     for (var j = 0; j < routesData.data1.length; j++) {
@@ -23,7 +25,6 @@ $.getJSON("routes.json", function(data1) {
     });
     routes.setMap(map);
 });
-
 var latlngRoutes1 = [];
 $.getJSON("routes.json", function(data1) {
     var routesData1 = { data1 };
@@ -48,7 +49,6 @@ $.getJSON("routes.json", function(data1) {
     });
     routes1.setMap(map);
 });
-
 var latlngRoutes2 = [];
 $.getJSON("routes.json", function(data2) {
     var routesData2 = { data2 };
@@ -73,7 +73,6 @@ $.getJSON("routes.json", function(data2) {
     });
     routes2.setMap(map);
 });
-
 var latlngRoutes3 = [];
 $.getJSON("routes.json", function(data3) {
     var routesData3 = { data3 };
@@ -98,7 +97,6 @@ $.getJSON("routes.json", function(data3) {
     });
     routes3.setMap(map);
 });
-
 var latlngRoutes4 = [];
 $.getJSON("routes.json", function(data4) {
     var routesData4 = { data4 };
@@ -123,7 +121,6 @@ $.getJSON("routes.json", function(data4) {
     });
     routes4.setMap(map);
 });
-
 var latlngRoutes5 = [];
 $.getJSON("routes.json", function(data5) {
     var routesData5 = { data5 };
@@ -148,7 +145,6 @@ $.getJSON("routes.json", function(data5) {
     });
     routes5.setMap(map);
 });
-
 var latlngRoutes6 = [];
 $.getJSON("routes.json", function(data6) {
     var routesData6 = { data6 };
@@ -173,7 +169,6 @@ $.getJSON("routes.json", function(data6) {
     });
     routes6.setMap(map);
 });
-
 var latlngRoutes7 = [];
 $.getJSON("routes.json", function(data7) {
     var routesData7 = { data7 };
@@ -210,12 +205,9 @@ $(document).ready(function() {
     update();
     setInterval(update, 1000);
 });
-
 var map, infoWindow;
 var latLng;
-
 var queryURL = "http://developer.itsmarta.com/BRDRestService/BRDRestService.svc/GetAllBus";
-
 $.ajax({
     url: queryURL,
     method: "GET"
@@ -243,6 +235,10 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: new google.maps.LatLng(33.7763658, -84.3899218),
         zoom: 15.5
+    })
+    map2 = new google.maps.Map(document.getElementById('section2B'), {
+        center: new google.maps.LatLng(33.7763658, -84.3899218),
+        zoom: 15.5
     });
     // Gets map boundries
     google.maps.event.addListener(map, 'bounds_changed', function() {
@@ -252,18 +248,14 @@ function initMap() {
         // console.log(bounds);
         var markers = [];
 
-
         //Creates array of data for all the Marta stops that we can use 
-        var latlngDestination = [];
-        var allBusStops = [];
         $.getJSON("busStops.json", function(data) {
             var icons = {
                 info: {
-                    icon: '/assets/images/little-blue-bus.png'
+                    icon: '../assets/images/little-blue-bus.png'
                 }
             };
             var stopsData = { data };
-
             for (var i = 0; i < stopsData.data.length; i++) {
 
                 var busStops = {
@@ -289,59 +281,68 @@ function initMap() {
                         icon: icons.info.icon,
                         map: map
                     });
-
                     latlngDestination.sort(function(a, b) {
                         return a.dis - b.dis
                     })
-
                     var min = latlngDestination[0],
                         max = latlngDestination[latlngDestination.length - 1]
-
-
                 }
-
                 markers.push(marker);
             };
-            console.log(latlngDestination[0]);
-            // console.log(allBusStops[100].lat);
-            // console.log(allBusStops[100].lng);
-            var lat1 = allBusStops[0].lat
-            var lon1 = allBusStops[0].lng
+            // function initMap() {
+            //   map = new google.maps.Map(document.getElementById('section2B'), {
+            //     center: new google.maps.LatLng(33.7763658, -84.3899218), zoom: 15.5
+            //   });
 
-            // console.log(userPos[0].lat);
-            // console.log(userPos[0].lng);
-
-
-            var lat2 = userPos[0].lat
-            var lon2 = userPos[0].lng
-
-            function distance(lat1, lon1, lat2, lon2) {
-                if ((lat1 == lat2) && (lon1 == lon2)) {
-                    return 0;
-                } else {
-                    var radlat1 = Math.PI * lat1 / 180;
-                    var radlat2 = Math.PI * lat2 / 180;
-                    var theta = lon1 - lon2;
-                    var radtheta = Math.PI * theta / 180;
-                    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-                    if (dist > 1) {
-                        dist = 1;
+            function displayRoute() {
+                var start = new google.maps.LatLng(userPos[0].lat, userPos[0].lng);
+                var end = new google.maps.LatLng(latlngDestination[0].lat, latlngDestination[0].lng);
+                var directionsDisplay = new google.maps.DirectionsRenderer(); // also, constructor can get "DirectionsRendererOptions" object
+                directionsDisplay.setMap(map2); // map should be already initialized.
+                var request = {
+                    origin: start,
+                    destination: end,
+                    travelMode: google.maps.TravelMode.WALKING
+                };
+                var directionsService = new google.maps.DirectionsService();
+                directionsService.route(request, function(response, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(response);
+                        console.log(response);
                     }
-                    dist = Math.acos(dist);
-                    dist = dist * 180 / Math.PI;
-                    dist = dist * 60 * 1.1515;
-                    return dist;
-                }
+                });
 
             }
-            // console.log(distance(allBusStops[100].lat, allBusStops[100].lng, userPos[0].lat, userPos[0].lng));
+            displayRoute(console.log());
+            console.log(latlngDestination[0]);
+            var lat1 = allBusStops[0].lat
+            var lon1 = allBusStops[0].lng
+        })
 
-        });
+        var lat2 = userPos[0].lat
+        var lon2 = userPos[0].lng
 
+        function distance(lat1, lon1, lat2, lon2) {
+            if ((lat1 == lat2) && (lon1 == lon2)) {
+                return 0;
+            } else {
+                var radlat1 = Math.PI * lat1 / 180;
+                var radlat2 = Math.PI * lat2 / 180;
+                var theta = lon1 - lon2;
+                var radtheta = Math.PI * theta / 180;
+                var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+                if (dist > 1) {
+                    dist = 1;
+                }
+                dist = Math.acos(dist);
+                dist = dist * 180 / Math.PI;
+                dist = dist * 60 * 1.1515;
+                return dist;
+            }
+
+        }
     });
-
-    // var transitLayer = new google.maps.TransitLayer();
-    // transitLayer.setMap(map);
+    // });
 
     infoWindow = new google.maps.InfoWindow;
     // Try HTML5 geolocation.
@@ -350,14 +351,12 @@ function initMap() {
             var pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
-
             };
             userPos.push(pos);
             infoWindow.setPosition(pos);
             infoWindow.setContent('You are here.');
             infoWindow.open(map);
             map.setCenter(pos);
-
             var circle = new google.maps.Circle({
                 center: pos,
                 map: map,
@@ -402,7 +401,6 @@ var APIKey = "166a433c57516f51dfab1f7edaed8413";
 // Here we are building the URL we need to query the database
 var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
     "q=Atlanta,Georgia&units=imperial&appid=" + APIKey;
-
 // Here we run our AJAX call to the OpenWeatherMap API
 $.ajax({
         url: queryURL,
@@ -421,11 +419,13 @@ $.ajax({
         $(".city").html("<h1>" + response.name + " Weather Details</h1>");
         $(".wind").text("Wind Speed: " + response.wind.speed);
         $(".humidity").text("Humidity: " + response.main.humidity);
-        $(".temp").text("Temperature (F) " + response.main.temp);
+
+        $(".temp").text("Temperature (F): " + response.main.temp);
+
         $(".condition").text("Current Conditions: " + response.weather[0].main);
 
         // Log the data in the console as well
         console.log("Wind Speed: " + response.wind.speed);
         console.log("Humidity: " + response.main.humidity);
-        console.log("Temperature (F): " + response.main.temp);
+        console.log("Temperature (F): " + response[0].main.temp);
     });
