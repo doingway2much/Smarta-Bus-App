@@ -44,7 +44,7 @@
         background-color: #e6e9ec;
         height: 350px;
         text-align: center;
-        margin-bottom: 10%;
+        margin-bottom: 5%;
         border-style: none solid solid solid;
         border-width: 2px;
         font-weight: bold;
@@ -57,7 +57,7 @@
         background-color: #e6e9ec;
         height: 350px;
         text-align: center;
-        margin-bottom: 10%;
+        margin-bottom: 5%;
         border-style: none solid solid solid;
         border-width: 2px;
         font-weight: bold;
@@ -83,4 +83,5 @@
         border-width: 2px;
         align-content: center;
         text-align: center;
+        margin-bottom: 5%;
     }
