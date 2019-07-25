@@ -1,79 +1,86 @@
     h1 {
-    color: red;
+        color: red;
     }
+    
     font {
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
     
-    body{
+    body {
         background-image: url("http://media.bizj.us/view/img/2768081/marta-bus*1200xx2464-1387-0-210.jpg");
         background-size: cover;
     }
+    
     .jumbotron {
-    /* background-image: url(/assets/Images/SMARTA.png); */
-    /* background-size: cover; */
-    background-repeat:  no-repeat;
-    text-align: center;
+        /* background-image: url(/assets/Images/SMARTA.png); */
+        /* background-size: cover; */
+        background-repeat: no-repeat;
+        text-align: center;
     }
     
-    #section1A { 
-    margin-right: 95px;
-    background-color: #e6e9ec;
-    height: 40px;
-    text-align: center;
-    border-style: solid solid none solid ;
-    border-width: 2px;
-    font-weight: bold;
-    font-size: 18px;
+    #section1A {
+        margin-right: 95px;
+        background-color: #e6e9ec;
+        height: 40px;
+        text-align: center;
+        border-style: solid solid none solid;
+        border-width: 2px;
+        font-weight: bold;
+        font-size: 18px;
     }
-        
+    
     #section2A {
-   
-    background-color: #e6e9ec;
-    height: 40px;
-    text-align: center;
-    border-style: solid solid none solid ;
-    border-width: 2px;
-    font-weight: bold;
-    font-size: 18px;
+        background-color: #e6e9ec;
+        height: 40px;
+        text-align: center;
+        border-style: solid solid none solid;
+        border-width: 2px;
+        font-weight: bold;
+        font-size: 18px;
     }
     
-    #section1B { 
-    margin-right: 95px;
-    background-color: #e6e9ec;
-    height: 350px;
-    text-align: center;
-    margin-bottom: 10%;
-    border-style: none solid solid solid;
-    border-width: 2px;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 10px;
-    overflow: auto;
+    #section1B {
+        margin-right: 95px;
+        background-color: #e6e9ec;
+        height: 350px;
+        text-align: center;
+        margin-bottom: 10%;
+        border-style: none solid solid solid;
+        border-width: 2px;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 10px;
+        overflow: auto;
     }
     
     #section2B {
-    background-color: #e6e9ec;
-    height: 350px;
-    text-align: center;
-    margin-bottom: 10%;
-    border-style: none solid solid solid;
-    border-width: 2px;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 10px;
+        background-color: #e6e9ec;
+        height: 350px;
+        text-align: center;
+        margin-bottom: 10%;
+        border-style: none solid solid solid;
+        border-width: 2px;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 10px;
     }
     
     #map {
-    background-color: green;
-    text-align: center;
-    height: 500px;
-    width: 100%;
-    float: left; 
+        background-color: green;
+        text-align: center;
+        height: 500px;
+        width: 100%;
+        float: left;
     }
     
-    h5{
-    color: #FF7500;
+    h5 {
+        color: #FF7500;
     }
-
-
+    
+    #weather {
+        background-color: white;
+        border-style: none solid solid solid;
+        border-width: 2px;
+        align-content: center;
+        text-align: center;
+    }
