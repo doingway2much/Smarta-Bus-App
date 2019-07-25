@@ -22,7 +22,7 @@
         margin-right: 95px;
         background-color: #e6e9ec;
         height: 40px;
-        text-align: center;
+        text-align: left;
         border-style: solid solid none solid;
         border-width: 2px;
         font-weight: bold;
@@ -32,7 +32,7 @@
     #section2A {
         background-color: #e6e9ec;
         height: 40px;
-        text-align: center;
+        text-align: left;
         border-style: solid solid none solid;
         border-width: 2px;
         font-weight: bold;
@@ -43,26 +43,26 @@
         margin-right: 95px;
         background-color: #e6e9ec;
         height: 350px;
-        text-align: center;
+        text-align: left;
         margin-bottom: 5%;
         border-style: none solid solid solid;
         border-width: 2px;
         font-weight: bold;
         font-size: 18px;
-        line-height: 10px;
+        line-height: 18px;
         overflow: auto;
     }
     
     #section2B {
         background-color: #e6e9ec;
         height: 350px;
-        text-align: center;
+        text-align: left;
         margin-bottom: 5%;
         border-style: none solid solid solid;
         border-width: 2px;
         font-weight: bold;
-        font-size: 18px;
-        line-height: 10px;
+        font-size: 20px;
+        line-height: 20x;
     }
     
     #map {

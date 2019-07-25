@@ -2,7 +2,7 @@ var userPos = [];
 var latlngRoutes = [];
 var latlngDestination = [];
 var allBusStops = [];
-$.getJSON("routes.json", function(data1) {
+$.getJSON("routes.json", function (data1) {
     var routesData = { data1 };
     for (var j = 0; j < routesData.data1.length; j++) {
         if (routesData.data1[j].shape_id === 110851) {
@@ -26,7 +26,7 @@ $.getJSON("routes.json", function(data1) {
     routes.setMap(map);
 });
 var latlngRoutes1 = [];
-$.getJSON("routes.json", function(data1) {
+$.getJSON("routes.json", function (data1) {
     var routesData1 = { data1 };
     for (var j = 0; j < routesData1.data1.length; j++) {
         if (routesData1.data1[j].shape_id === 111145) {
@@ -50,7 +50,7 @@ $.getJSON("routes.json", function(data1) {
     routes1.setMap(map);
 });
 var latlngRoutes2 = [];
-$.getJSON("routes.json", function(data2) {
+$.getJSON("routes.json", function (data2) {
     var routesData2 = { data2 };
     for (var j = 0; j < routesData2.data2.length; j++) {
         if (routesData2.data2[j].shape_id === 111136) {
@@ -74,7 +74,7 @@ $.getJSON("routes.json", function(data2) {
     routes2.setMap(map);
 });
 var latlngRoutes3 = [];
-$.getJSON("routes.json", function(data3) {
+$.getJSON("routes.json", function (data3) {
     var routesData3 = { data3 };
     for (var j = 0; j < routesData3.data3.length; j++) {
         if (routesData3.data3[j].shape_id === 111049) {
@@ -98,7 +98,7 @@ $.getJSON("routes.json", function(data3) {
     routes3.setMap(map);
 });
 var latlngRoutes4 = [];
-$.getJSON("routes.json", function(data4) {
+$.getJSON("routes.json", function (data4) {
     var routesData4 = { data4 };
     for (var j = 0; j < routesData4.data4.length; j++) {
         if (routesData4.data4[j].shape_id === 111060) {
@@ -122,7 +122,7 @@ $.getJSON("routes.json", function(data4) {
     routes4.setMap(map);
 });
 var latlngRoutes5 = [];
-$.getJSON("routes.json", function(data5) {
+$.getJSON("routes.json", function (data5) {
     var routesData5 = { data5 };
     for (var j = 0; j < routesData5.data5.length; j++) {
         if (routesData5.data5[j].shape_id === 111151) {
@@ -146,7 +146,7 @@ $.getJSON("routes.json", function(data5) {
     routes5.setMap(map);
 });
 var latlngRoutes6 = [];
-$.getJSON("routes.json", function(data6) {
+$.getJSON("routes.json", function (data6) {
     var routesData6 = { data6 };
     for (var j = 0; j < routesData6.data6.length; j++) {
         if (routesData6.data6[j].shape_id === 111170) {
@@ -170,7 +170,7 @@ $.getJSON("routes.json", function(data6) {
     routes6.setMap(map);
 });
 var latlngRoutes7 = [];
-$.getJSON("routes.json", function(data7) {
+$.getJSON("routes.json", function (data7) {
     var routesData7 = { data7 };
     for (var j = 0; j < routesData7.data7.length; j++) {
         if (routesData7.data7[j].shape_id === 110838) {
@@ -194,10 +194,10 @@ $.getJSON("routes.json", function(data7) {
     routes7.setMap(map);
 });
 // Show current time //
-$(document).ready(function() {
+$(document).ready(function () {
     var datetime = null,
         date = null;
-    var update = function() {
+    var update = function () {
         date = moment(new Date())
         datetime.html(date.format('dddd, MMMM Do YYYY, h:mm:ss a'));
     };
@@ -211,10 +211,9 @@ var queryURL = "http://developer.itsmarta.com/BRDRestService/BRDRestService.svc/
 $.ajax({
     url: queryURL,
     method: "GET"
-}).then(function(response) {
+}).then(function (response) {
     for (var i = 0; i < response.length; i++) {
-        // var stopDistance = distance(response[i].LATITUDE, response[i].LONGITUDE, userPos[0].lat, userPos[0].lng);
-        // console.log(stopDistance);
+
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(response[i].LATITUDE, response[i].LONGITUDE),
             map: map
@@ -222,7 +221,7 @@ $.ajax({
         var adherence = response[i].ADHERENCE;
         var vehicle = response[i].VEHICLE;
         var route = response[i].ROUTE;
-        $("#section1B").append("Bus Number: " + vehicle + " and Route Number: " + route + " is " + adherence + " Minutes on Schedule.<br><hr>");
+        // $("#section1B").append("Bus Number: " + vehicle + " and Route Number: " + route + " is " + adherence + " Minutes on Schedule.<br><hr>");
         latLng = (parseFloat(response[i].LATITUDE) + "," + parseFloat(response[i].LONGITUDE));
         var marker = new google.maps.Marker({
             coords: latLng,
@@ -241,15 +240,15 @@ function initMap() {
         zoom: 15.5
     });
     // Gets map boundries
-    google.maps.event.addListener(map, 'bounds_changed', function() {
+    google.maps.event.addListener(map, 'bounds_changed', function () {
         var bounds = map.getBounds();
         var ne = bounds.getNorthEast();
         var sw = bounds.getSouthWest();
-        // console.log(bounds);
+
         var markers = [];
 
         //Creates array of data for all the Marta stops that we can use 
-        $.getJSON("busStops.json", function(data) {
+        $.getJSON("busStops.json", function (data) {
             var icons = {
                 info: {
                     icon: 'assets/Images/little-blue-bus.png'
@@ -263,7 +262,6 @@ function initMap() {
                     lng: parseFloat(stopsData.data[i].stop_lon),
                 }
                 allBusStops.push(busStops);
-                // console.log(distance(stopsData.data[i].stop_lat, stopsData.data[i].stop_lon, userPos[0].lat, userPos[0].lng));
                 var stopDistance = distance(stopsData.data[i].stop_lat, stopsData.data[i].stop_lon, userPos[0].lat, userPos[0].lng);
                 var closeStops = {
                     lat: parseFloat(stopsData.data[i].stop_lat),
@@ -272,8 +270,6 @@ function initMap() {
                 }
                 if (stopDistance < 1.0) {
                     latlngDestination.push(closeStops);
-                    // console.log(latlngDestination);
-
                 }
                 if (stopDistance < 0.499582) {
                     var marker = new google.maps.Marker({
@@ -281,7 +277,7 @@ function initMap() {
                         icon: icons.info.icon,
                         map: map
                     });
-                    latlngDestination.sort(function(a, b) {
+                    latlngDestination.sort(function (a, b) {
                         return a.dis - b.dis
                     })
                     var min = latlngDestination[0],
@@ -289,11 +285,6 @@ function initMap() {
                 }
                 markers.push(marker);
             };
-            // function initMap() {
-            //   map = new google.maps.Map(document.getElementById('section2B'), {
-            //     center: new google.maps.LatLng(33.7763658, -84.3899218), zoom: 15.5
-            //   });
-
             function displayRoute() {
                 var start = new google.maps.LatLng(userPos[0].lat, userPos[0].lng);
                 var end = new google.maps.LatLng(latlngDestination[0].lat, latlngDestination[0].lng);
@@ -304,11 +295,42 @@ function initMap() {
                     destination: end,
                     travelMode: google.maps.TravelMode.WALKING
                 };
+                var startLocation = null;
+                var endLocation = null;
                 var directionsService = new google.maps.DirectionsService();
-                directionsService.route(request, function(response, status) {
+                directionsService.route(request, function (response, status) {
                     if (status == google.maps.DirectionsStatus.OK) {
                         directionsDisplay.setDirections(response);
                         console.log(response);
+                        var route = response.routes[0]
+                        console.log(route.legs[0].start_address);
+                        $("#section1B").prepend("Starting Address: " + route.legs[0].start_address + "<br>");
+                        console.log(route.legs[0].distance.text);
+                        $("#section1B").append("Distance: " + route.legs[0].distance.text + "<br>");
+                        console.log(route.legs[0].duration.text);
+                        $("#section1B").append("Duration: " + route.legs[0].duration.text + "<br>");
+                        console.log(route.legs[0].end_address);
+                        $("#section1B").append("Ending Address: " + route.legs[0].end_address + "<br>");
+                        $("#section1B").append("<br>");
+                        $("#section1B").append("Directions: " + "<br>");
+                    }
+                    var path = response.routes[0].overview_path;
+                    var legs = response.routes[0].legs;
+                    for (i = 0; i < legs.length; i++) {
+                        if (i == 0) {
+                        }
+                        var steps = legs[i].steps;
+                        for (j = 0; j < steps.length; j++) {
+                            var nextSegment = steps[j].path;
+                            section1B.innerHTML += "<li>" + steps[j].instructions;
+                            var dist_dur = "";
+
+                            if (dist_dur != "") {
+                                section1B.innerHTML += "(" + dist_dur + ")<br /></li>";
+                            } else {
+                                section1B.innerHTML += "</li>";
+                            }
+                        }
                     }
                 });
 
@@ -318,10 +340,8 @@ function initMap() {
             var lat1 = allBusStops[0].lat
             var lon1 = allBusStops[0].lng
         })
-
         var lat2 = userPos[0].lat
         var lon2 = userPos[0].lng
-
         function distance(lat1, lon1, lat2, lon2) {
             if ((lat1 == lat2) && (lon1 == lon2)) {
                 return 0;
@@ -339,15 +359,12 @@ function initMap() {
                 dist = dist * 60 * 1.1515;
                 return dist;
             }
-
         }
     });
-    // });
-
     infoWindow = new google.maps.InfoWindow;
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(function (position) {
             var pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
@@ -374,11 +391,9 @@ function initMap() {
                 fillOpacity: 0.0,
                 strokeColor: "#33CAFF",
                 strokeWeight: 6 // No border
-
-
             });
 
-        }, function() {
+        }, function () {
             handleLocationError(true, infoWindow, map.getCenter());
         });
     } else {
@@ -386,7 +401,6 @@ function initMap() {
         handleLocationError(false, infoWindow, map.getCenter());
     }
 }
-
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ?
@@ -403,11 +417,11 @@ var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
     "q=Atlanta,Georgia&units=imperial&appid=" + APIKey;
 // Here we run our AJAX call to the OpenWeatherMap API
 $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
+    url: queryURL,
+    method: "GET"
+})
     // We store all of the retrieved data inside of an object called "response"
-    .then(function(response) {
+    .then(function (response) {
 
         // Log the queryURL
         console.log(queryURL);
