@@ -410,7 +410,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 // This is our API key
-var APIKey = "166a433c57516f51dfab1f7edaed8413";
+var APIKey = "APIKEY";
 
 // Here we are building the URL we need to query the database
 var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
