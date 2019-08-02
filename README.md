@@ -1,8 +1,3 @@
-![ProjectOne](https://github.com/doingway2much/Bootstrap-Portfolio/blob/master/assets/img/smarta.jpg?raw=true)
-
-
-
-
 To be able to run this code you will need a few things.  First you need an API key from Google MAP's API and it needs to be added into the as a script at the bottom of your HTML on the index.html
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key="YOUR KEY GOES HERE&callback=initMap"></script>
@@ -12,6 +7,9 @@ To be able to run this code you will need a few things.  First you need an API k
 Next you will need to add your own weather API key from https://api.openweathermap.org
 // This is our API key
 var APIKey = "Enter Your Weather API key";
+
+
+![ProjectOne](https://github.com/doingway2much/Bootstrap-Portfolio/blob/master/assets/img/smarta.jpg?raw=true)
 
 
 ***
