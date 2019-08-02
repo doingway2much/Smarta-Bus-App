@@ -14,12 +14,12 @@ var APIKey = "Enter Your Weather API key";
 
 ***
 License
-GifTastic
+Smarta-Bus-App
 ***
 
 Copyright (c) 2019 www.doingway2much.com
 
-The MIT license (the “License”) set forth below applies to all parts of the GifTastic project. You may not use this file except in compliance with the License.
+The MIT license (the “License”) set forth below applies to all parts of the Smarta-Bus-App project. You may not use this file except in compliance with the License.
 
 MIT License
 
