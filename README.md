@@ -6,7 +6,7 @@ To be able to run this code you will need a few things.  First you need an API k
 // This is our API key  
 var APIKey = "Enter Your Weather API key";  
 
-![ProjectOne](https://github.com/doingway2much/Bootstrap-Portfolio/blob/master/assets/img/smarta.jpg?raw=true)  
+![ProjectOne](https://github.com/doingway2much/Bootstrap-Portfolio/blob/master/assets/img/smarta.jpg?raw=true)
 
 
 ***
